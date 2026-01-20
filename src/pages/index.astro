@@ -1,0 +1,33 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import Experience from '../components/Experience.astro';
+import Services from '../components/Services.astro';
+import Gallery from '../components/Gallery.astro';
+import About from '../components/About.astro';
+import Location from '../components/Location.astro';
+import CTA from '../components/CTA.astro';
+import Footer from '../components/Footer.astro';
+import WhatsAppButton from '../components/WhatsAppButton.astro';
+
+import '../styles/global.css';
+
+const config = {
+  whatsappNumber: '56975727819',
+  instagramHandle: 'saturno.studio_',
+};
+---
+
+<Layout title="Saturno Studio | Nail Salon Premium en Batuco">
+  <Header whatsappNumber={config.whatsappNumber} />
+  <Hero whatsappNumber={config.whatsappNumber} />
+  <Experience />
+  <Services instagramHandle={config.instagramHandle} />
+  <Gallery instagramHandle={config.instagramHandle} />
+  <About />
+  <Location city="Batuco" region="Santiago, Chile" />
+  <CTA whatsappNumber={config.whatsappNumber} instagramHandle={config.instagramHandle} />
+  <Footer whatsappNumber={config.whatsappNumber} instagramHandle={config.instagramHandle} />
+  <WhatsAppButton whatsappNumber={config.whatsappNumber} />
+</Layout>

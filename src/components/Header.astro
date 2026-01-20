@@ -1,0 +1,115 @@
+---
+interface Props {
+  whatsappNumber?: string;
+}
+
+const { whatsappNumber = '56975727819' } = Astro.props;
+---
+
+<nav class="nav fixed top-0 left-0 right-0 z-50 py-5 transition-all duration-400" id="navbar">
+  <div class="nav-container flex justify-between items-center max-w-[1200px] mx-auto px-6">
+    <a href="#" class="nav-logo font-serif text-[1.8rem] font-medium text-rose-gold no-underline tracking-[0.1em]">
+      Saturno Studio
+    </a>
+
+    <ul class="nav-links hidden md:flex gap-10 list-none">
+      <li><a href="#inicio" class="nav-link">Inicio</a></li>
+      <li><a href="#servicios" class="nav-link">Servicios</a></li>
+      <li><a href="#galeria" class="nav-link">Galeria</a></li>
+      <li><a href="#nosotros" class="nav-link">Nosotros</a></li>
+    </ul>
+
+    <a
+      href={`https://wa.me/${whatsappNumber}`}
+      class="nav-cta hidden md:inline-block bg-rose-gold text-white py-3 px-7 rounded-full no-underline text-[0.8rem] font-medium tracking-[0.1em] uppercase transition-all duration-300 hover:bg-pink-accent hover:-translate-y-0.5"
+      target="_blank"
+      style="box-shadow: 0 10px 30px rgba(183, 110, 121, 0.3);"
+    >
+      Reservar
+    </a>
+
+    <button class="mobile-menu-btn flex md:hidden flex-col gap-[5px] bg-transparent border-none cursor-pointer p-[5px]" id="mobileMenuBtn" aria-label="Menu">
+      <span class="w-[25px] h-0.5 bg-rose-gold transition-all duration-300"></span>
+      <span class="w-[25px] h-0.5 bg-rose-gold transition-all duration-300"></span>
+      <span class="w-[25px] h-0.5 bg-rose-gold transition-all duration-300"></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu fixed inset-0 bg-cream z-[999] flex flex-col items-center justify-center gap-10 translate-x-full transition-transform duration-500" id="mobileMenu">
+  <button class="absolute top-6 right-6 bg-transparent border-none cursor-pointer p-2.5" id="mobileMenuClose" aria-label="Cerrar menu">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 stroke-text-dark" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"/>
+    </svg>
+  </button>
+  <a href="#inicio" class="mobile-link font-serif text-[2rem] text-text-dark no-underline transition-colors duration-300 hover:text-rose-gold">Inicio</a>
+  <a href="#servicios" class="mobile-link font-serif text-[2rem] text-text-dark no-underline transition-colors duration-300 hover:text-rose-gold">Servicios</a>
+  <a href="#galeria" class="mobile-link font-serif text-[2rem] text-text-dark no-underline transition-colors duration-300 hover:text-rose-gold">Galeria</a>
+  <a href="#nosotros" class="mobile-link font-serif text-[2rem] text-text-dark no-underline transition-colors duration-300 hover:text-rose-gold">Nosotros</a>
+  <a href={`https://wa.me/${whatsappNumber}`} target="_blank" class="mobile-link font-serif text-[2rem] text-rose-gold no-underline">Reservar Hora</a>
+</div>
+
+<style>
+  .nav.scrolled {
+    background: rgba(255, 250, 249, 0.95);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 2px 40px rgba(183, 110, 121, 0.08);
+    padding: 16px 0;
+  }
+
+  .nav-link {
+    @apply no-underline text-text-medium text-[0.85rem] font-medium tracking-[0.1em] uppercase relative transition-colors duration-300;
+  }
+
+  .nav-link::after {
+    content: '';
+    @apply absolute -bottom-1 left-0 w-0 h-px bg-rose-gold transition-all duration-300;
+  }
+
+  .nav-link:hover {
+    @apply text-rose-gold;
+  }
+
+  .nav-link:hover::after {
+    @apply w-full;
+  }
+
+  .mobile-menu.active {
+    transform: translateX(0);
+  }
+</style>
+
+<script>
+  const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const mobileMenuClose = document.getElementById('mobileMenuClose');
+  const mobileLinks = document.querySelectorAll('.mobile-link');
+  const navbar = document.getElementById('navbar');
+
+  mobileMenuBtn?.addEventListener('click', () => {
+    mobileMenu?.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  });
+
+  mobileMenuClose?.addEventListener('click', () => {
+    mobileMenu?.classList.remove('active');
+    document.body.style.overflow = '';
+  });
+
+  mobileLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu?.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+  });
+
+  // Navbar scroll effect
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+      navbar?.classList.add('scrolled');
+    } else {
+      navbar?.classList.remove('scrolled');
+    }
+  });
+</script>

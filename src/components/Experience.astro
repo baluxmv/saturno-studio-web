@@ -1,0 +1,30 @@
+---
+interface ExperienceItem {
+  number: string;
+  label: string;
+}
+
+const items: ExperienceItem[] = [
+  { number: '13+', label: 'Anos de Experiencia' },
+  { number: '2013', label: 'Desde' },
+  { number: '100%', label: 'Dedicacion' },
+  { number: '5', label: 'Estrella Servicio' },
+];
+---
+
+<section class="py-20 bg-white relative">
+  <div class="container">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-10 text-center">
+      {items.map((item, index) => (
+        <div class={`p-8 reveal ${index > 0 ? `reveal-delay-${index}` : ''}`}>
+          <div class="font-serif text-5xl md:text-6xl font-light text-rose-gold leading-none mb-3">
+            {item.number}
+          </div>
+          <div class="text-xs font-medium tracking-[0.15em] uppercase text-text-light">
+            {item.label}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
